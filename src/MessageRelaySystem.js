@@ -265,7 +265,6 @@ export class MessageRelaySystem {
       )}...${walletAddress.substring(walletAddress.length - 4)}`;
       const formattedMessage = `[Push] [${shortWallet}]\n${message.message.content}`;
 
-      // Enviar para Discord
       if (connection.discord.channelId) {
         const channel = this.clients
           .get(pushChannelAddress)
@@ -275,12 +274,11 @@ export class MessageRelaySystem {
         }
       }
 
-      // Enviar para Telegram
       if (connection.telegram.chatId) {
         // const telegramOptions = {};
         // if (connection.telegram.threadId) {
         //   telegramOptions.message_thread_id = connection.telegram.threadId;
-        // }
+        // } ERROR ETELEGRAM: 400 Bad Request: TOPIC_CLOSED
         await this.clients.get(pushChannelAddress).telegram.sendMessage(
           connection.telegram.chatId,
           formattedMessage

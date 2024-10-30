@@ -40,9 +40,6 @@ export class PushBot {
       const command = messageContent.split(" ")[0].toLowerCase();
       const args = messageContent.split(" ").slice(1);
       switch (command) {
-        // case "/create-config" && message.event === "chat.request": // direct message
-        //   await this.handleCreateConfigCommand(message, args);
-        //   break;
         case "/create-channel":
           await this.handleCreateChannel(message, args);
           break;
@@ -167,28 +164,6 @@ export class PushBot {
     } catch (error) {
       console.error("Error adding Telegram config:", error);
       await this.sendResponse(message.from, `Error adding Telegram config`);
-    }
-  }
-
-  // not tested
-  async handleCreateConfigCommand(message, args) {
-    try {
-      const response = `To create a new configuration, please provide the following information in this format:
-
-name, discordChannelId, telegramChatId, pushChannelAddress
-
-Example:
-my-channel, 123456789, -100987654321, 0x1234...5678
-
-Note: Make sure you have the necessary permissions for all channels.`;
-
-      await this.sendResponse(message.from, response);
-
-      // You might want to store this user's state to handle their next message
-      // For example, you could use a Map to track users in "creation mode"
-    } catch (error) {
-      console.error("Error handling create command:", error);
-      await this.sendResponse(message.from, `Error: ${error.message}`);
     }
   }
 

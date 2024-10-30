@@ -1,7 +1,7 @@
 create table user_channel_configs (
   id push_channel_address text primary key,
-  user_id text not null, -- Endereço/chave pública Web3
-  name text not null, -- nome amigável para identificar o grupo de canais
+  user_id text not null, -- public key Web3
+  name text not null,
   discord_token text,
   telegram_token text,
   discord_channel_id text,
